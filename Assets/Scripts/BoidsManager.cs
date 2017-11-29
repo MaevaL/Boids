@@ -10,8 +10,12 @@ public class BoidsManager : MonoBehaviour {
     public Vector3 range = new Vector3(5,5,5);
 
     public bool seekGoal = true; // if off no more center
-    public bool obedient = true; // if off no followif flocking rules anymore
+    public bool obedient = true; // if off no following flocking rules anymore
     public bool repulsive = false; // if true they run from each other
+
+    float horizontalMove = 0;
+    float verticalMove = 0;
+    public float speed = 20f;
 
 
     [Range(0, 200)]
@@ -31,6 +35,16 @@ public class BoidsManager : MonoBehaviour {
         }
 	}
 
+    private void Update() {
+        Move();
+    }
+
+    void Move() {
+        horizontalMove = Input.GetAxis("Horizontal");
+        verticalMove = Input.GetAxis("Vertical");
+
+        transform.Translate(horizontalMove * speed * Time.deltaTime , verticalMove * speed * Time.deltaTime , 0);
+    }
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(this.transform.position, range * 2);

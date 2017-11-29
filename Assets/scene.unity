@@ -264,7 +264,7 @@ Prefab:
     - target: {fileID: 114172360441002292, guid: b097c5a3697095a4f987fc9f4dd84628,
         type: 2}
       propertyPath: maxForce
-      value: 0.27
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 114172360441002292, guid: b097c5a3697095a4f987fc9f4dd84628,
         type: 2}
@@ -289,8 +289,60 @@ Prefab:
     - target: {fileID: 114172360441002292, guid: b097c5a3697095a4f987fc9f4dd84628,
         type: 2}
       propertyPath: maxVelocity
-      value: 1.28
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114172360441002292, guid: b097c5a3697095a4f987fc9f4dd84628,
+        type: 2}
+      propertyPath: speed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b097c5a3697095a4f987fc9f4dd84628, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &813386382 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1549371045750170, guid: b097c5a3697095a4f987fc9f4dd84628,
+    type: 2}
+  m_PrefabInternal: {fileID: 779039714}
+--- !u!212 &813386385
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 813386382}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 229e001b938ceba4d853c1f95499d507, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.3, y: 0.32}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
