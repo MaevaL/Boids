@@ -37,6 +37,13 @@ public class Boid : MonoBehaviour {
         Debug.DrawRay(this.transform.position, force, Color.white);
     }
 
+
+    /// <summary>
+    /// flock() : apply flocking rules
+    /// Obedient boolean if for applying flocking rules or not
+    /// Repulsive boolean is for applying a repulsive force to boids
+    /// The random is used to update flocking rules less than one by frame
+    /// </summary>
     void flock() {
         location = this.transform.position;
         velocity = this.GetComponent<Rigidbody2D>().velocity;
@@ -59,6 +66,7 @@ public class Boid : MonoBehaviour {
         if(manager.GetComponent<BoidsManager>().repulsive && Random.Range(0,50) <= 1) {
             if(Random.Range(0,50) < 1) {
                 currentForce = new Vector2(Random.Range(0.01f, 0.1f), Random.Range(0.01f, 0.1f));
+                currentForce = currentForce.normalized;
             }
         }
 
@@ -80,7 +88,7 @@ public class Boid : MonoBehaviour {
             }
             if (count > 0) {
                 sum /= count;
-                Vector2 steer = sum - velocity;
+                Vector2 steer = sum - velocity ;
                 return steer;
             }
         }
@@ -106,8 +114,6 @@ public class Boid : MonoBehaviour {
             }
         }
         return Vector2.zero;
-
-
     }
 
     // Update is called once per frame
@@ -116,4 +122,5 @@ public class Boid : MonoBehaviour {
         goalPos = manager.transform.position;
 
     }
+
 }
