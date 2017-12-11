@@ -48,29 +48,24 @@ public class Boid : MonoBehaviour {
         location = this.transform.position;
         velocity = this.GetComponent<Rigidbody2D>().velocity;
 
-        if(manager.GetComponent<BoidsManager>().obedient && Random.Range(0,50) <= 1) {
+        if(manager.GetComponent<BoidsManager>().obedient) {
             Vector2 align = alignement();
             Vector2 cohesio= cohesion();
+            Vector2 repulsio = repulsion();
             Vector2 goalLocation;
 
             if (manager.GetComponent<BoidsManager>().seekGoal) {
                 goalLocation = seek(goalPos);
-                currentForce = goalLocation + align + cohesio;
+
+                currentForce = manager.GetComponent<BoidsManager>().goalLoc * goalLocation.normalized + manager.GetComponent<BoidsManager>().align * align + manager.GetComponent<BoidsManager>().cohesion * cohesio + manager.GetComponent<BoidsManager>().repulsion * repulsio;
             } else {
-                currentForce = align + cohesio;
+                currentForce = manager.GetComponent<BoidsManager>().align * align + manager.GetComponent<BoidsManager>().cohesion * cohesio + manager.GetComponent<BoidsManager>().repulsion * repulsio; ;
             }
        
             currentForce = currentForce.normalized;
         }
 
-        if(manager.GetComponent<BoidsManager>().repulsive && Random.Range(0,50) <= 1) {
-            if(Random.Range(0,50) < 1) {
-                currentForce = new Vector2(Random.Range(0.01f, 0.1f), Random.Range(0.01f, 0.1f));
-                currentForce = currentForce.normalized;
-            }
-        }
-
-        applyForce(currentForce);
+        applyForce(currentForce/ manager.GetComponent<BoidsManager>().inertie);
     }
 
     Vector2 alignement() {
@@ -92,6 +87,7 @@ public class Boid : MonoBehaviour {
                 return steer;
             }
         }
+        //Debug.Log(neighbourDistance);
         return Vector2.zero;
     }
     
@@ -115,6 +111,29 @@ public class Boid : MonoBehaviour {
         }
         return Vector2.zero;
     }
+
+    Vector2 repulsion() {
+        float neighbourDistance = manager.GetComponent<BoidsManager>().neighbourDistance;
+        float mindist = 10000000000000000;
+        GameObject boidMin = null;
+        foreach (GameObject boid in manager.GetComponent<BoidsManager>().boidsArray) {
+            if(boid != this.gameObject) {
+                float distance = Vector2.Distance(location , boid.GetComponent<Boid>().location);
+                if(distance < mindist && distance < neighbourDistance) {
+                    mindist = distance;
+                    boidMin = boid;        
+                }
+            }
+        }
+        if(boidMin) {
+            Vector2 dir = gameObject.transform.position - boidMin.gameObject.transform.position;
+            return -dir/mindist;
+        }
+        else {
+            return Vector2.zero;
+        }      
+    }
+
 
     // Update is called once per frame
     void Update() {

@@ -19,11 +19,26 @@ public class BoidsManager : MonoBehaviour {
 
 
     [Range(0, 200)]
-    public int neighbourDistance = 20;
-    [Range(0, 2)]
+    public float neighbourDistance = 0.01f;
+    [Range(0, 200)]
     public float maxForce = 0.5f;
-    [Range(0, 2)]
+    [Range(0, 200)]
     public float maxVelocity = 2.0f;
+
+    [Range(0,200)]
+    public float cohesion;
+    [Range(0 , 200)]
+    public float align;
+    [Range(0 , 200)]
+    public float repulsion;
+    [Range(0,200)]
+    public float goalLoc;
+
+    [Range(0.1f , 1)]
+    public float inertie = 0.1f;
+
+
+
 
     // Use this for initialization
     void Start () {
